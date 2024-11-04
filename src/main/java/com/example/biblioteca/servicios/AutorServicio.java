@@ -1,6 +1,8 @@
 package com.example.biblioteca.servicios;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,19 @@ public class AutorServicio {
         List<Autor> autores = new ArrayList<>();
         autores = autorRepositorio.findAll();
         return autores;
+    }
+
+    @Transactional
+    public void modificarAutor(UUID id, String nombreNuevo){
+        Optional<Autor> respuesta = autorRepositorio.findById(id);
+        if(respuesta.isPresent()){
+            Autor autor = respuesta.get();
+            autor.setNombre(nombreNuevo);
+            autorRepositorio.save(autor);
+        }
+        else{
+            System.out.println("No se encontro el autor con el id: " + id);
+        }
     }
 
 }
