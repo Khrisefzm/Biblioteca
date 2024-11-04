@@ -2,6 +2,8 @@ package com.example.biblioteca.servicios;
 
 import java.util.Date;
 import java.util.UUID;
+import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +42,14 @@ public class LibroServicio {
 
         libroRepositorio.save(libro);
     }
+
+    @Transactional(readOnly = true)
+    public List<Libro> listarLibros() {
+
+        List<Libro> libros = new ArrayList<>();
+        libros = libroRepositorio.findAll();
+        return libros;
+    }
+    
     
 }

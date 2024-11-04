@@ -1,4 +1,7 @@
 package com.example.biblioteca.servicios;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,15 +13,25 @@ import com.example.biblioteca.repositorios.AutorRepositorio;
 @Service
 public class AutorServicio {
 
-@Autowired
-private AutorRepositorio autorRepositorio;
+    @Autowired
+    private AutorRepositorio autorRepositorio;
 
 
-@Transactional
-public void crearAutor(String nombre){
-            
-    Autor autor = new Autor();// Instancio un objeto del tipo Autor
-    autor.setNombre(nombre);// Seteo el atributo, con el valor recibido como parámetro
-    autorRepositorio.save(autor); // Persisto el dato en mi BBDD
+    @Transactional
+    public void crearAutor(String nombre){
+                
+        Autor autor = new Autor();// Instancio un objeto del tipo Autor
+        autor.setNombre(nombre);// Seteo el atributo, con el valor recibido como parámetro
+        autorRepositorio.save(autor); // Persisto el dato en mi BBDD
     }
+
+
+    @Transactional(readOnly = true)
+    public List<Autor> listarAutores() {
+        List<Autor> autores = new ArrayList<>();
+        autores = autorRepositorio.findAll();
+        return autores;
+    }
+
 }
+
