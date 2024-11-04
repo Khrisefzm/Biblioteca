@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.biblioteca.entidades.Editorial;
+import com.example.biblioteca.excepciones.MiException;
 import com.example.biblioteca.repositorios.EditorialRepositorio;
 
 @Service
@@ -19,7 +20,8 @@ public class EditorialServicio {
     private EditorialRepositorio editorialRepositorio;
 
     @Transactional
-    public void crearEditorial(String nombre){
+    public void crearEditorial(String nombre) throws MiException {
+        validar(nombre);
         Editorial editorial = new Editorial();// Instancio un objeto del tipo Editorial
         editorial.setNombre(nombre);// Seteo el atributo, con el valor recibido como parámetro
         editorialRepositorio.save(editorial); // Persisto el dato en mi BBDD
@@ -32,7 +34,8 @@ public class EditorialServicio {
     }
 
     @Transactional
-    public void modificarEditorial(UUID id, String nombreNuevo){
+    public void modificarEditorial(UUID id, String nombreNuevo) throws MiException {
+        validar(nombreNuevo);
         Optional<Editorial> respuesta = editorialRepositorio.findById(id);
         if(respuesta.isPresent()){
             Editorial editorial = respuesta.get();
@@ -40,6 +43,12 @@ public class EditorialServicio {
             editorialRepositorio.save(editorial);
         } else {
             System.out.println("No se encontro la editorial con el id: " + id);
+        }
+    }
+
+     private void validar(String nombre) throws MiException {
+        if (nombre.isEmpty() || nombre == null) {
+            throw new MiException("el nombre no puede ser nulo o estar vacio");
         }
     }
 }
