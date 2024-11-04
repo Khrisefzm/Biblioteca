@@ -3,6 +3,7 @@ package com.example.biblioteca.servicios;
 import java.util.Date;
 import java.util.UUID;
 import java.util.List;
+import java.util.Optional;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,33 @@ public class LibroServicio {
         return libros;
     }
     
-    
+    @Transactional
+    public void modificarLibro(Long isbn, String titulo, Integer ejemplares, UUID idAutor, UUID idEditorial) {
+        Optional<Libro> respuestaLibro = libroRepositorio.findById(isbn);
+        Optional<Autor> respuestaAutor = autorRepositorio.findById(idAutor);
+        Optional<Editorial> respuestaEditorial = editorialRepositorio.findById(idEditorial);
+
+        Autor autor = new Autor();
+        Editorial editorial = new Editorial();
+
+        if (respuestaAutor.isPresent()) {
+            autor = respuestaAutor.get();
+        }
+
+        if (respuestaEditorial.isPresent()) {
+            editorial = respuestaEditorial.get();
+        }
+
+        if (respuestaLibro.isPresent()){
+            Libro libro = respuestaLibro.get();
+            libro.setTitulo(titulo);
+            libro.setEjemplares(ejemplares);
+            libro.setAutor(autor);
+            libro.setEditorial(editorial);
+
+            libroRepositorio.save(libro);
+        } else {
+            System.out.println("No se encontro el libro con el ISBN: " + isbn);
+        }
+    }
 }

@@ -2,6 +2,8 @@ package com.example.biblioteca.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +29,17 @@ public class EditorialServicio {
         List<Editorial> editoriales = new ArrayList<>();
         editoriales = editorialRepositorio.findAll();
         return editoriales;
+    }
+
+    @Transactional
+    public void modificarEditorial(UUID id, String nombreNuevo){
+        Optional<Editorial> respuesta = editorialRepositorio.findById(id);
+        if(respuesta.isPresent()){
+            Editorial editorial = respuesta.get();
+            editorial.setNombre(nombreNuevo);
+            editorialRepositorio.save(editorial);
+        } else {
+            System.out.println("No se encontro la editorial con el id: " + id);
+        }
     }
 }
