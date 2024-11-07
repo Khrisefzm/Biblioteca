@@ -13,7 +13,6 @@ public class Libro {
     @Id
     private long isbn;
     // El id se genera manualmente
-
     private String titulo;
     private Integer ejemplares;
     
