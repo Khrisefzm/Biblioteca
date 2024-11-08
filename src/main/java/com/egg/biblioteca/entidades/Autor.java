@@ -1,5 +1,4 @@
-package com.example.biblioteca.entidades;
-
+package com.egg.biblioteca.entidades;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
@@ -8,16 +7,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Editorial {
+public class Autor {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     private String nombre;
-    
-    public Editorial() {}
 
-    public Editorial(String nombre) {
+    public Autor() {}
+
+    public Autor(String nombre) {
         this.nombre = nombre;
     }
 
@@ -37,5 +37,4 @@ public class Editorial {
         this.nombre = nombre;
     }
 
-    
 }

@@ -1,4 +1,4 @@
-package com.example.biblioteca.servicios;
+package com.egg.biblioteca.servicios;
 
 import java.util.Date;
 import java.util.UUID;
@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.biblioteca.entidades.Autor;
-import com.example.biblioteca.entidades.Editorial;
-import com.example.biblioteca.entidades.Libro;
-import com.example.biblioteca.excepciones.MiException;
-import com.example.biblioteca.repositorios.AutorRepositorio;
-import com.example.biblioteca.repositorios.EditorialRepositorio;
-import com.example.biblioteca.repositorios.LibroRepositorio;
+import com.egg.biblioteca.entidades.Autor;
+import com.egg.biblioteca.entidades.Editorial;
+import com.egg.biblioteca.entidades.Libro;
+import com.egg.biblioteca.excepciones.MiException;
+import com.egg.biblioteca.repositorios.AutorRepositorio;
+import com.egg.biblioteca.repositorios.EditorialRepositorio;
+import com.egg.biblioteca.repositorios.LibroRepositorio;
 
 @Service
 public class LibroServicio {
