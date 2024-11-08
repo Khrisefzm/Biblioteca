@@ -1,4 +1,4 @@
-package com.example.biblioteca.servicios;
+package com.egg.biblioteca.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.biblioteca.entidades.Editorial;
-import com.example.biblioteca.excepciones.MiException;
-import com.example.biblioteca.repositorios.EditorialRepositorio;
+import com.egg.biblioteca.entidades.Editorial;
+import com.egg.biblioteca.excepciones.MiException;
+import com.egg.biblioteca.repositorios.EditorialRepositorio;
 
 @Service
 public class EditorialServicio {

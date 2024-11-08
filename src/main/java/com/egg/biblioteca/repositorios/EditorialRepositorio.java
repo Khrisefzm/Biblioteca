@@ -1,8 +1,8 @@
-package com.example.biblioteca.repositorios;
+package com.egg.biblioteca.repositorios;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.biblioteca.entidades.Editorial;
+import com.egg.biblioteca.entidades.Editorial;
 
 import java.util.UUID;
 
