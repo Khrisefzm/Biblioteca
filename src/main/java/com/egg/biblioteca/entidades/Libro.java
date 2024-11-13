@@ -11,7 +11,7 @@ import jakarta.persistence.TemporalType;
 @Entity
 public class Libro {
     @Id
-    private long isbn;
+    private Long isbn;
     // El id se genera manualmente
     private String titulo;
     private Integer ejemplares;
@@ -32,7 +32,7 @@ public class Libro {
         return isbn;
     }
 
-    public void setIsbn(long isbn) {
+    public void setIsbn(Long isbn) {
         this.isbn = isbn;
     }
 
@@ -75,6 +75,4 @@ public class Libro {
     public void setEditorial(Editorial editorial) {
         this.editorial = editorial;
     }
-
-    
 }

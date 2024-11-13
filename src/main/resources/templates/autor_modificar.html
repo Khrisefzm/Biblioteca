@@ -115,10 +115,16 @@
       </div>
     </nav>
     <div class="container-fluid m-5 contenedor">
-      <form class="formulario" th:action="@{/autor/registro}" method="POST">
+      <form
+        class="formulario"
+        th:action="@{/autor/__${autor.id}__}"
+        method="POST"
+      >
+        <input hidden th:value="${autor.id}" name="id" />
         <div class="form-group my-3">
           <label class="mb-2">Cargar Autores</label>
           <input
+            th:value="${autor.nombre}"
             type="text"
             class="form-control"
             name="nombre"
