@@ -1,11 +1,13 @@
 package com.egg.biblioteca.controladores;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,17 +34,35 @@ public class AutorControlador {
         return "autor_list.html";
     }
 
+    
+    @GetMapping("/modificar/{id}")
+    public String modificar(@PathVariable UUID id, ModelMap model) {
+        model.put("autor", autorServicio.getOne(id));
+        return "autor_modificar.html";
+    }
+    
     @PostMapping("/registro")
     public String registro(@RequestParam String nombre, ModelMap model){
         try {
             autorServicio.crearAutor(nombre);
             model.put("exito", "Autor creado con exito");
+            return "index.html";
         } catch (MiException ex) {          
             model.put("error", ex.getMessage());
             return "autor_form.html";
         }        
-        return "index.html";      
-        
+    }
+
+    @PostMapping("{id}")
+    public String modificar(@PathVariable UUID id, String nombre, ModelMap modelo) {
+        try {
+            autorServicio.modificarAutor(id, nombre);
+            modelo.put("exito", "Autor modificado con exito");
+            return "redirect:../autor/lista";
+        } catch (MiException ex) {
+            modelo.put("error", ex.getMessage());
+            return "autor_modificar.html";
+        }
     }
 
 }

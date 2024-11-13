@@ -33,6 +33,11 @@ public class EditorialServicio {
         return editoriales;
     }
 
+    @Transactional(readOnly = true)
+    public Editorial getOne(UUID id){
+        return editorialRepositorio.getReferenceById(id);
+    }
+
     @Transactional
     public void modificarEditorial(UUID id, String nombreNuevo) throws MiException {
         validar(nombreNuevo);
