@@ -63,9 +63,9 @@ public class LibroControlador {
   }
   
   @PostMapping("/registro")
-  public String registro(@RequestParam(required = false) Long isbn ,@RequestParam String titulo, @RequestParam(required = false) Integer ejemplares,@RequestParam UUID idAutor, @RequestParam UUID idEditorial, ModelMap modelo) {
+  public String registro(@RequestParam(required = false) Long isbn ,@RequestParam String titulo, @RequestParam(required = false) Integer ejemplares, @RequestParam String idAutor, @RequestParam String idEditorial, ModelMap modelo) {
     try {
-      libroServicio.crearLibro(isbn, titulo, ejemplares, idAutor, idEditorial);
+      libroServicio.crearLibro(isbn, titulo, ejemplares, UUID.fromString(idAutor), UUID.fromString(idEditorial));
       modelo.put("exito", "Libro creado con exito");
       return "index.html";
     } catch (MiException ex) {
